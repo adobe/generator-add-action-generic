@@ -10,13 +10,13 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 -->
 
-# generator-add-generic-action
+# generator-add-action-generic
 
-[![Version](https://img.shields.io/npm/v/@adobe/generator-add-generic-action.svg)](https://npmjs.org/package/@adobe/generator-add-generic-action)
-[![Downloads/week](https://img.shields.io/npm/dw/@adobe/generator-add-generic-action.svg)](https://npmjs.org/package/@adobe/generator-add-generic-action)
-[![Node.js CI](https://github.com/adobe/generator-add-generic-action/actions/workflows/node.js.yml/badge.svg)](https://github.com/adobe/generator-add-generic-action/actions/workflows/node.js.yml)
-[![License](https://img.shields.io/npm/l/@adobe/generator-add-generic-action.svg)](https://github.com/adobe/generator-add-generic-action/blob/main/package.json)
-[![Codecov Coverage](https://img.shields.io/codecov/c/github/adobe/generator-add-generic-action/master.svg?style=flat-square)](https://codecov.io/gh/adobe/generator-add-generic-action/)
+[![Version](https://img.shields.io/npm/v/@adobe/generator-add-action-generic.svg)](https://npmjs.org/package/@adobe/generator-add-action-generic)
+[![Downloads/week](https://img.shields.io/npm/dw/@adobe/generator-add-action-generic.svg)](https://npmjs.org/package/@adobe/generator-add-action-generic)
+[![Node.js CI](https://github.com/adobe/generator-add-action-generic/actions/workflows/node.js.yml/badge.svg)](https://github.com/adobe/generator-add-action-generic/actions/workflows/node.js.yml)
+[![License](https://img.shields.io/npm/l/@adobe/generator-add-action-generic.svg)](https://github.com/adobe/generator-add-action-generic/blob/main/package.json)
+[![Codecov Coverage](https://img.shields.io/codecov/c/github/adobe/generator-add-action-generic/master.svg?style=flat-square)](https://codecov.io/gh/adobe/generator-add-action-generic/)
 
 A generic action that can be added to an App Builder app as a template
 
