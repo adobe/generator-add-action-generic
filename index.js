@@ -1,5 +1,5 @@
 /*
-Copyright 2022 Adobe. All rights reserved.
+Copyright 2019 Adobe. All rights reserved.
 This file is licensed to you under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License. You may obtain a copy
 of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -9,91 +9,62 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const Generator = require('yeoman-generator')
 const path = require('path')
-const upath = require('upath')
+const { constants, ActionGenerator, commonTemplates } = require('@adobe/generator-app-common-lib')
+const { commonDependencyVersions } = constants
 
-const { constants, utils } = require('@adobe/generator-app-common-lib')
-const { runtimeManifestKey } = constants
+class GenericGenerator extends ActionGenerator {
+  constructor (args, opts) {
+    super(args, opts)
+    this.props = {
+      description: 'This is a sample action showcasing how to access an external API',
+      // eslint-disable-next-line quotes
+      requiredParams: `[/* add required params */]`,
+      // eslint-disable-next-line quotes
+      requiredHeaders: `['Authorization']`,
+      // eslint-disable-next-line quotes
+      importCode: `const fetch = require('node-fetch')
+const { Core } = require('@adobe/aio-sdk')`,
 
-/*
-      'initializing',
-      'prompting',
-      'configuring',
-      'default',
-      'writing',
-      'conflicts',
-      'install',
-      'end'
-      */
+      responseCode: `// replace this with the api you want to access
+    const apiEndpoint = 'https://adobeioruntime.net/api/v1'
 
-class DxExcshell1 extends Generator {
-  constructor (args, opts, features) {
-    super(args, opts, features)
-
-    // options are inputs from CLI or yeoman parent generator
-    this.option('skip-prompt', { default: false })
+    // fetch content from external api endpoint
+    const res = await fetch(apiEndpoint)
+    if (!res.ok) {
+      throw new Error('request to ' + apiEndpoint + ' failed with status code ' + res.status)
+    }
+    const content = await res.json()
+    const response = {
+      statusCode: 200,
+      body: content
+    }`
+    }
   }
 
-  async initializing () {
-    // all paths are relative to root
-    this.extFolder = 'src/dx-excshell-1'
-    this.actionFolder = path.join(this.extFolder, 'actions')
-    // todo support multi UI (could be one for each operation)
-    this.webSrcFolder = path.join(this.extFolder, 'web-src')
-    this.extConfigPath = path.join(this.extFolder, 'ext.config.yaml')
-    this.configName = 'dx/excshell/1'
-
-    // generate the generic action
-    this.composeWith(path.join(__dirname, './templates/add-action/generic'), {
-      // forward needed args
-      'skip-prompt': true, // do not ask for action name
-      'action-folder': this.actionFolder,
-      'config-path': this.extConfigPath,
-      'full-key-to-manifest': runtimeManifestKey
-    })
-
-    // generate the UI
-    this.composeWith(path.join(__dirname, './templates/add-web-assets/exc-react'), {
-      // forward needed args
-      'skip-prompt': this.options['skip-prompt'],
-      'web-src-folder': this.webSrcFolder,
-      'config-path': this.extConfigPath
-    })
+  async prompting () {
+    this.props.actionName = await this.promptForActionName('showcases how to access an external API', 'generic')
   }
 
-  async writing () {
-    const unixExtConfigPath = upath.toUnix(this.extConfigPath)
-    // add the extension point config in root
-    utils.writeKeyAppConfig(
-      this,
-      // key
-      'extensions.' + this.configName,
-      // value
-      {
-        // posix separator
+  writing () {
+    this.sourceRoot(path.join(__dirname, '.'))
 
-        $include: unixExtConfigPath
+    this.addAction(this.props.actionName, commonTemplates['stub-action'], {
+      testFile: './templates/fetchExample.test.js',
+      sharedLibFile: commonTemplates.utils,
+      sharedLibTestFile: commonTemplates['utils.test'],
+      e2eTestFile: commonTemplates['stub-action.e2e'],
+      tplContext: this.props,
+      dependencies: {
+        '@adobe/aio-sdk': commonDependencyVersions['@adobe/aio-sdk'],
+        'node-fetch': '^2.6.0'
+      },
+      actionManifestConfig: {
+        inputs: { LOG_LEVEL: 'debug' },
+        annotations: { final: true } // makes sure loglevel cannot be overwritten by request param
       }
-    )
-
-    // add extension point operation
-    utils.writeKeyYAMLConfig(
-      this,
-      this.extConfigPath,
-      // key
-      'operations', {
-        view: [
-          { type: 'web', impl: 'index.html' }
-        ]
-      }
-    )
-
-    // add actions path, relative to config file
-    utils.writeKeyYAMLConfig(this, this.extConfigPath, 'actions', path.relative(this.extFolder, this.actionFolder))
-    // add web-src path, relative to config file
-    utils.writeKeyYAMLConfig(this, this.extConfigPath, 'web', path.relative(this.extFolder, this.webSrcFolder))
+    })
   }
 }
 
-module.exports = DxExcshell1
+module.exports = GenericGenerator
