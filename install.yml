@@ -5,6 +5,3 @@ categories:
   - helper-template
   - action
   - ui
-
-extensions:
-  - extensionPointId: dx/excshell/1
