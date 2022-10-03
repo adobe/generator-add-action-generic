@@ -1,6 +1,6 @@
 {
   "name": "@adobe/generator-add-action-generic",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Extensibility template for generating a generic App Builder action",
   "main": "index.js",
   "engines": {
