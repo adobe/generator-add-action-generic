@@ -57,6 +57,7 @@ const { Core } = require('@adobe/aio-sdk')`,
       tplContext: this.props,
       dependencies: {
         '@adobe/aio-sdk': commonDependencyVersions['@adobe/aio-sdk'],
+        '@adobe/aio-exc-app': commonDependencyVersions['@adobe/aio-exc-app'],
         'node-fetch': '^2.6.0'
       },
       actionManifestConfig: {

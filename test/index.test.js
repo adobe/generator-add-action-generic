@@ -34,9 +34,6 @@ function assertGeneratedFiles (actionName) {
   assert.file(`test/${actionName}.test.js`)
   assert.file(`e2e/${actionName}.e2e.test.js`)
 
-  assert.file(`${constants.actionsDirname}/utils.js`)
-  assert.file('test/utils.test.js')
-
   assert.file('ext.config.yaml')
 }
 
@@ -86,7 +83,13 @@ describe('run', () => {
     assertGeneratedFiles(actionName)
     assertActionCodeContent(actionName)
     assertManifestContent(actionName)
-    assertDependencies(fs, { '@adobe/aio-sdk': expect.any(String), 'node-fetch': expect.any(String) }, { '@openwhisk/wskdebug': expect.any(String) })
+    assertDependencies(fs, {
+      '@adobe/aio-exc-app': expect.any(String),
+      '@adobe/aio-sdk': expect.any(String),
+      'node-fetch': expect.any(String)
+    }, {
+      '@openwhisk/wskdebug': expect.any(String)
+    })
     assertNodeEngines(fs, constants.nodeEngines)
   })
 
@@ -114,7 +117,13 @@ describe('run', () => {
     assertGeneratedFiles(actionName)
     assertActionCodeContent(actionName)
     assertManifestContent(actionName)
-    assertDependencies(fs, { '@adobe/aio-sdk': expect.any(String), 'node-fetch': expect.any(String) }, { '@openwhisk/wskdebug': expect.any(String) })
+    assertDependencies(fs, {
+      '@adobe/aio-exc-app': expect.any(String),
+      '@adobe/aio-sdk': expect.any(String),
+      'node-fetch': expect.any(String)
+    }, {
+      '@openwhisk/wskdebug': expect.any(String)
+    })
     assertNodeEngines(fs, constants.nodeEngines)
   })
 
@@ -130,7 +139,13 @@ describe('run', () => {
     assertGeneratedFiles(actionName)
     assertActionCodeContent(actionName)
     assertManifestContent(actionName)
-    assertDependencies(fs, { '@adobe/aio-sdk': expect.any(String), 'node-fetch': expect.any(String) }, { '@openwhisk/wskdebug': expect.any(String) })
+    assertDependencies(fs, {
+      '@adobe/aio-exc-app': expect.any(String),
+      '@adobe/aio-sdk': expect.any(String),
+      'node-fetch': expect.any(String)
+    }, {
+      '@openwhisk/wskdebug': expect.any(String)
+    })
     assertNodeEngines(fs, constants.nodeEngines)
   })
 })
