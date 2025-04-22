@@ -86,7 +86,7 @@ describe('run', () => {
     assertGeneratedFiles(actionName)
     assertActionCodeContent(actionName)
     assertManifestContent(actionName)
-    assertDependencies(fs, { '@adobe/aio-sdk': expect.any(String), 'node-fetch': expect.any(String) }, { '@openwhisk/wskdebug': expect.any(String) })
+    assertDependencies(fs, { '@adobe/aio-sdk': expect.any(String), 'node-fetch': expect.any(String) })
     assertNodeEngines(fs, constants.nodeEngines)
   })
 
@@ -114,7 +114,7 @@ describe('run', () => {
     assertGeneratedFiles(actionName)
     assertActionCodeContent(actionName)
     assertManifestContent(actionName)
-    assertDependencies(fs, { '@adobe/aio-sdk': expect.any(String), 'node-fetch': expect.any(String) }, { '@openwhisk/wskdebug': expect.any(String) })
+    assertDependencies(fs, { '@adobe/aio-sdk': expect.any(String), 'node-fetch': expect.any(String) })
     assertNodeEngines(fs, constants.nodeEngines)
   })
 
@@ -130,7 +130,7 @@ describe('run', () => {
     assertGeneratedFiles(actionName)
     assertActionCodeContent(actionName)
     assertManifestContent(actionName)
-    assertDependencies(fs, { '@adobe/aio-sdk': expect.any(String), 'node-fetch': expect.any(String) }, { '@openwhisk/wskdebug': expect.any(String) })
+    assertDependencies(fs, { '@adobe/aio-sdk': expect.any(String), 'node-fetch': expect.any(String) })
     assertNodeEngines(fs, constants.nodeEngines)
   })
 })
