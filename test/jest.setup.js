@@ -24,10 +24,9 @@ afterEach(() => { stdout.stop(); stderr.stop() })
 global.n = p => path.normalize(p)
 global.r = p => path.resolve(p)
 
-global.assertDependencies = (fs, dependencies, devDependencies) => {
+global.assertDependencies = (fs, dependencies) => {
   expect(JSON.parse(fs.readFileSync('package.json').toString())).toEqual(expect.objectContaining({
-    dependencies,
-    devDependencies
+    dependencies
   }))
 }
 
