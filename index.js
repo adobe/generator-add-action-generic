@@ -18,11 +18,10 @@ class GenericGenerator extends ActionGenerator {
     super(args, opts)
     this.props = {
       description: 'This is a sample action showcasing how to access an external API',
-      // eslint-disable-next-line quotes
+      // eslint-disable-next-line @stylistic/quotes
       requiredParams: `[/* add required params */]`,
-      // eslint-disable-next-line quotes
+      // eslint-disable-next-line @stylistic/quotes
       requiredHeaders: `['Authorization']`,
-      // eslint-disable-next-line quotes
       importCode: `const fetch = require('node-fetch')
 const { Core } = require('@adobe/aio-sdk')`,
 
