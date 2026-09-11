@@ -9,17 +9,17 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const helpers = require('yeoman-test')
-const assert = require('yeoman-assert')
-const fs = require('fs')
-const yaml = require('js-yaml')
-const cloneDeep = require('lodash.clonedeep')
+import helpers from 'yeoman-test'
+import assert from 'yeoman-assert'
+import fs from 'node:fs'
+import yaml from 'js-yaml'
+import cloneDeep from 'lodash.clonedeep'
 
-const Generator = require('yeoman-generator')
+import Generator from 'yeoman-generator'
 
-const { constants } = require('@adobe/generator-app-common-lib')
+import { constants } from '@adobe/generator-app-common-lib'
 
-const generic = require('../index')
+import generic from '../index.js'
 
 describe('prototype', () => {
   test('exports a yeoman generator', () => {
