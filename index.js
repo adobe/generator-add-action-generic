@@ -9,8 +9,11 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const path = require('path')
-const { constants, ActionGenerator, commonTemplates } = require('@adobe/generator-app-common-lib')
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { constants, ActionGenerator, commonTemplates } from '@adobe/generator-app-common-lib'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const { commonDependencyVersions } = constants
 
 class GenericGenerator extends ActionGenerator {
@@ -66,4 +69,4 @@ const { Core } = require('@adobe/aio-sdk')`,
   }
 }
 
-module.exports = GenericGenerator
+export default GenericGenerator

@@ -10,23 +10,47 @@ governing permissions and limitations under the License.
 */
 
 import neostandard from 'neostandard'
-import jestPlugin from 'eslint-plugin-jest'
 
 export default [
   { ignores: ['templates/**/templates/', 'node_modules/'] },
   ...neostandard(),
   {
-    plugins: { jest: jestPlugin },
-    rules: {
-      ...jestPlugin.configs.recommended.rules
-    },
+    // template payloads are copied verbatim into generated apps, which are
+    // CommonJS and use Jest — lint them as such rather than as this package's ESM/Vitest
+    files: ['templates/**/*.js'],
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: {
+        jest: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly'
+      }
+    }
+  },
+  {
+    files: ['test/**/*.js'],
     languageOptions: {
       globals: {
-        ...jestPlugin.environments.globals.globals,
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        vi: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
         n: 'readonly',
         r: 'readonly',
         assertDependencies: 'readonly',
-        assertNodeEngines: 'readonly'
+        assertNodeEngines: 'readonly',
+        basicGeneratorOptions: 'readonly'
       }
     }
   }
